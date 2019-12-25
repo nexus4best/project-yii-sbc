@@ -4,9 +4,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 $session = Yii::$app->session;
 $CshDatabaseServerAlone = $session->get('CshDatabaseServerAlone');
-$CshDatabaseServerAlone += ["CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
+//$CshDatabaseServerAlone += ["CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
 //$CshDatabaseServerAlone += [ "ADSL" => "ADSL", "CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
-$this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
+$this->title = 'แจ้งซ่อม-ลิ้นชักเงินสด';
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -26,7 +26,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                     </td>
                 </tr>
                 <tr>
-                    <td><span style="color:red">*</span>ยี่ห้อ </td>
+                    <td>ยี่ห้อ</td>
                     <td>
                         <?= $form->field($model, 'BrnBrand')
                             ->textInput(['class' => 'form-control input-sm'])
@@ -44,7 +44,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                     </td>
                 </tr> 
                 <tr>
-                    <td><span style="color:red">*</span>หมายเลข</td>
+                    <td>หมายเลข</td>
                     <td>
                         <?= $form->field($model, 'BrnSerial')
                             ->textInput(['class' => 'form-control input-sm'])

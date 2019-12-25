@@ -35,7 +35,7 @@ class TblRepairSearch extends TblRepair
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => false,
-            //'pagination' => array('pageSize' => 10),
+            'pagination' => array('pageSize' => 10),
         ]);
 
         $this->load($params);

@@ -4,9 +4,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 $session = Yii::$app->session;
 $CshDatabaseServerAlone = $session->get('CshDatabaseServerAlone');
-$CshDatabaseServerAlone += ["CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
+$CshDatabaseServerAlone += ["BackOffice" => "BackOffice"];
 //$CshDatabaseServerAlone += [ "ADSL" => "ADSL", "CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
-$this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
+$this->title = 'แจ้งซ่อม-คอมพิวเตอร์-RAM';
 ?>
 <div class="panel panel-default">
     <div class="panel-body">

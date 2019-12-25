@@ -4,9 +4,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 $session = Yii::$app->session;
 $CshDatabaseServerAlone = $session->get('CshDatabaseServerAlone');
-$CshDatabaseServerAlone += ["CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
+$CshDatabaseServerAlone += ["BackOffice" => "BackOffice"];
 //$CshDatabaseServerAlone += [ "ADSL" => "ADSL", "CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
-$this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
+$this->title = 'แจ้งซ่อม-เครื่องพิมพ์เอกสาร-RICOH';
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -24,25 +24,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                     </td>
                     <td>
                     </td>
-                </tr>
-                <tr>
-                    <td><span style="color:red">*</span>ยี่ห้อ </td>
-                    <td>
-                        <?= $form->field($model, 'BrnBrand')
-                            ->textInput(['class' => 'form-control input-sm'])
-                            ->label(false) 
-                        ?>
-                    </td>
                 </tr>   
-                <tr>
-                    <td>รุ่น</td>
-                    <td>
-                        <?= $form->field($model, 'BrnModel')
-                            ->textInput(['class' => 'form-control input-sm'])
-                            ->label(false) 
-                        ?>
-                    </td>
-                </tr> 
                 <tr>
                     <td><span style="color:red">*</span>หมายเลข</td>
                     <td>
@@ -51,16 +33,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                             ->label(false) 
                         ?>
                     </td>
-                </tr>
-                <tr>
-                    <td><span style="color:red">*</span>เครื่อง</td>
-                    <td>
-                        <?= $form->field($model, 'BrnPos')
-                            ->dropDownList($CshDatabaseServerAlone, ['prompt'=>'','class' => 'form-control input-sm'])
-                            ->label(false);
-                        ?>
-                    </td>
-                </tr>   
+                </tr> 
                 <tr>
                     <td><span style="color:red">*</span>สาเหตุ</td>
                     <td>

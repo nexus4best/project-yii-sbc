@@ -3,10 +3,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 $session = Yii::$app->session;
-$CshDatabaseServerAlone = $session->get('CshDatabaseServerAlone');
-$CshDatabaseServerAlone += ["CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
+//$CshDatabaseServerAlone = $session->get('CshDatabaseServerAlone');
+$CshDatabaseServerAlone = ["C01" => "C01", "ADSL" => "ADSL"];
 //$CshDatabaseServerAlone += [ "ADSL" => "ADSL", "CCTV" => "CCTV", "BackOffice" => "BackOffice" ];
-$this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
+$this->title = 'แจ้งซ่อม-SWITCH';
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -26,14 +26,14 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                     </td>
                 </tr>
                 <tr>
-                    <td><span style="color:red">*</span>ยี่ห้อ </td>
+                    <td>ยี่ห้อ</td>
                     <td>
                         <?= $form->field($model, 'BrnBrand')
                             ->textInput(['class' => 'form-control input-sm'])
                             ->label(false) 
                         ?>
                     </td>
-                </tr>   
+                </tr>  
                 <tr>
                     <td>รุ่น</td>
                     <td>
@@ -44,7 +44,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                     </td>
                 </tr> 
                 <tr>
-                    <td><span style="color:red">*</span>หมายเลข</td>
+                    <td>หมายเลข</td>
                     <td>
                         <?= $form->field($model, 'BrnSerial')
                             ->textInput(['class' => 'form-control input-sm'])
@@ -60,7 +60,7 @@ $this->title = 'แจ้งซ่อม-คอมพิวเตอร์';
                             ->label(false);
                         ?>
                     </td>
-                </tr>   
+                </tr>  
                 <tr>
                     <td><span style="color:red">*</span>สาเหตุ</td>
                     <td>
