@@ -1,4 +1,5 @@
 <?php
+    use yii\helpers\Html;
     $session = Yii::$app->session;
 ?>
 <div class="well well-sm">
@@ -10,7 +11,7 @@
     </span>
 </div>
 <div class="well well-sm">
-    <input type="button" value="แจ้งซ่อม CTS" class="btn btn-primary btn-sm" onclick="window.location.href='choice'" />
+    <?= Html::a('แจ้งซ่อม CTS', ['/repair/choice'], ['class' => 'btn btn-primary btn-sm']) ?>
     &nbsp;&nbsp;
     <input type="button" value="ทรัพย์สินอื่นๆ" class="btn btn-default btn-sm" onclick="window.location.href=''"/>
     <span class="header-logout-right">

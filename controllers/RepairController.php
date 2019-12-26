@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\TblComment;
+// use app\models\TblSend;
 use app\models\TblRepair;
 use app\models\TblRepairSearch;
 use yii\web\Controller;
@@ -102,7 +104,9 @@ class RepairController extends Controller
             $model->BrnCreateByName = Yii::$app->session->get('UserName');
             //$model->BrnRepair = "รายการอื่นๆ";
             $model->BrnStatus = "แจ้งซ่อม";
-            //$model->BrnPos = 'ADSL';
+            if(strlen($model->BrnPos) == 8){
+                $model->BrnPos = substr($model->BrnPos,5,3);
+            }
             $model->save();
             return $this->redirect('index');
         } else {
@@ -563,6 +567,7 @@ class RepairController extends Controller
 
     public function actionView($id)
     {
+        $this->layout = 'mainRepair';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -584,14 +589,23 @@ class RepairController extends Controller
 
     public function actionUpdate($id)
     {
+        $this->layout = 'mainRepair';
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
+        $model->scenario = 'update';
+        $model_comment = new TblComment;
+        if($model->load(Yii::$app->request->post()) && $model->validate() && $model_comment->load(Yii::$app->request->post()) && $model_comment->validate()){ 
+            
+            $model->save();
+        
+            $model_comment->MessageByName = Yii::$app->session->get('UserName');
+            $model_comment->id = $model->id;
+            $model_comment->save();
+            
+            return $this->redirect(array('index'));
+        }   
         return $this->render('update', [
             'model' => $model,
+            'model_comment' => $model_comment,
         ]);
     }
 
@@ -610,5 +624,13 @@ class RepairController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    // protected function findModelSend($id)
+    // {
+    //     if (($model_send = TblSend::findOne($id)) !== null) {
+    //         return $model_send;
+    //     }
+    //     throw new NotFoundHttpException('The requested page does not exist.');
+    // }
 
 }

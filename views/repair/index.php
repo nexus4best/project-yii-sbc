@@ -2,18 +2,27 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 $this->title = 'หน้าหลักแจ้งซ่อม';
 ?>
 <div class="tbl-repair-index">
-
+    <?php Url::remember(); //echo Url::previous();?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $url = Yii::$app->urlManager->createUrl(['repair/view','id'=>$model->id]);
+                    $x = Html::a($model->id, $url, ['title'=> 'แสดงรายการ']);
+                    return $x;
+                }
+            ],
             [
                 //'label' => 'สถานะ',
                 'attribute' => 'BrnStatus',
@@ -28,6 +37,11 @@ $this->title = 'หน้าหลักแจ้งซ่อม';
                         $brn_status = '<span class="label label-success">'.$model->BrnStatus.'</span>';
                     }elseif($model->BrnStatus == 'รับเรื่อง'){
                         $brn_status = '<span class="label label-info">'.$model->BrnStatus.'</span>';
+                    }elseif($model->BrnStatus == 'ส่งของ'){
+                        $url = Yii::$app->urlManager->createUrl(['repair/update','id'=>$model->id]);
+                        $x = Html::a('คลิกรับของ', $url, ['title'=> 'คลิกรับของ เมื่อของถึงสาขา']);
+                        //echo '<td><span">'.$x.'</span>'.'</td>';
+                        $brn_status = $x;
                     }else{
                         $brn_status = $model->BrnStatus;
                     }

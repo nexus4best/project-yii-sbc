@@ -2,64 +2,50 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\TblRepair */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="tbl-repair-form">
+<div class="panel panel-default">
+    <div class="panel-body">
+    <div class="tbl-repair-computer">
 
-    <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(); ?>
+        <?= Html::activeHiddenInput($model, 'BrnStatus', array("value"=> "เรียบร้อย")); ?>
+        <div class="form-group">
+            <?php
+                if($model->BrnRepair=='เครื่องพิมพ์เอกสาร-RICOH'){
+                    echo 'เลขที่ '.$model->id.' แจ้งซ่อม '.$model->BrnRepair.
+                    ' วันที่ '.substr($model->CreatedAt,8,2).'/'.substr($model->CreatedAt,5,2).'/'.substr($model->CreatedAt,2,2);
+                }else{
+                    echo 'เลขที่ '.$model->id.' แจ้งซ่อม '.$model->BrnRepair.
+                    ' ส่งของ '.substr($model->send->CreatedAt,8,2).'/'.substr($model->send->CreatedAt,5,2).'/'.substr($model->send->CreatedAt,2,2);
+                }
+            ?>
+        </div>
 
-    <?= $form->field($model, 'id')->textInput() ?>
 
-    <?= $form->field($model, 'BrnStatus')->textInput(['maxlength' => true]) ?>
+            <table style="width:380px">
+                <tr>
+                    <td>ข้อเสนอแนะเพิ่มเติม</td>
+                    <td>
+                    <?= $form->field($model_comment, 'Message')
+                        ->textArea()
+                        ->label(false) 
+                    ?>
+                    </td>
+                </tr>      
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <?= Html::submitButton('&nbsp;&nbsp;&nbsp;&nbsp;บันทึก&nbsp;&nbsp;&nbsp;&nbsp;', ['class' => 'btn btn-default btn-sm']) ?>
+                    </td>
+                </tr>                 
+            </table>
 
-    <?= $form->field($model, 'BrnCode')->textInput(['maxlength' => true]) ?>
+        <?php ActiveForm::end(); ?>
 
-    <?= $form->field($model, 'BrnRepair')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnPos')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnBrand')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnModel')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnSerial')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnCause')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'BrnCreateByName')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'AcceptAt')->textInput() ?>
-
-    <?= $form->field($model, 'AcceptByName')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DeleteByName')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DeleteCause')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'DeleteIP')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ReciveAt')->textInput() ?>
-
-    <?= $form->field($model, 'RepairAt')->textInput() ?>
-
-    <?= $form->field($model, 'RepairStatus')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'RepairByName')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'RepairReport')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CreatedAt')->textInput() ?>
-
-    <?= $form->field($model, 'UpdatedAt')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+        
+    </div>
 </div>

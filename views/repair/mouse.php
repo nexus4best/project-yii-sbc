@@ -56,6 +56,8 @@ $this->title = 'แจ้งซ่อม-เมาส์';
                     <td>&nbsp;</td>
                     <td>
                         <?= Html::submitButton('&nbsp;&nbsp;&nbsp;&nbsp;บันทึก&nbsp;&nbsp;&nbsp;&nbsp;', ['class' => 'btn btn-default btn-sm']) ?>
+                        &nbsp;&nbsp;
+                        <?= Html::a('&nbsp;&nbsp;&nbsp;&nbsp;ยกเลิก&nbsp;&nbsp;&nbsp;&nbsp;', ['/repair'], ['class' => 'btn btn-default btn-sm']) ?>
                     </td>
                 </tr>                 
             </table>
