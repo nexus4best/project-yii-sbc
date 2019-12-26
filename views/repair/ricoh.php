@@ -24,6 +24,24 @@ $this->title = 'แจ้งซ่อม-เครื่องพิมพ์เ
                     </td>
                     <td>
                     </td>
+                </tr> 
+                <tr>
+                    <td>ยี่ห้อ</td>
+                    <td>
+                        <?= $form->field($model, 'BrnBrand')
+                            ->textInput(['class' => 'form-control input-sm', 'value' => 'RICOH'])
+                            ->label(false) 
+                        ?>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>รุ่น</td>
+                    <td>
+                        <?= $form->field($model, 'BrnModel')
+                            ->textInput(['class' => 'form-control input-sm', 'value' => 'SP3500N'])
+                            ->label(false) 
+                        ?>
+                    </td>
                 </tr>   
                 <tr>
                     <td><span style="color:red">*</span>หมายเลข</td>

@@ -70,56 +70,107 @@ use yii\web\Session;
             ],
         ]);
     }elseif($model->BrnStatus == 'ส่งของ'){
-        echo DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                'id',
-                [
-                    'format' => 'html',
-                    'label' => 'สถานะ',
-                    'value' => '<span style="color:blue">'.$model->BrnStatus.'</span>',
+
+        if($model->BrnRepair == 'เครื่องพิมพ์เอกสาร-RICOH'){
+            echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    [
+                        'format' => 'html',
+                        'label' => 'สถานะ',
+                        'value' => '<span style="color:blue">'.$model->BrnStatus.'</span>',
+                    ],
+                    'BrnRepair',
+                    'BrnPos',
+                    [
+                        'format'=> 'html',
+                        'label' => 'ยี่ห้อ',
+                        'value' => $model->BrnBrand,
+                    ],
+                    [
+                        'format'=> 'html',
+                        'label' => 'รุ่น',
+                        'value' => $model->BrnModel,
+                    ],
+                    [
+                        'format'=> 'html',
+                        'label' => 'หมายเลข',
+                        'value' => $model->BrnSerial,
+                    ],
+                    'BrnCause',
+                    [
+                        'format' => 'html',
+                        'label' => 'วันที่สร้าง',
+                        'value' => substr($model->CreatedAt,8,2).'/'.substr($model->CreatedAt,5,2).'/'.substr($model->CreatedAt,2,2).' '.substr($model->CreatedAt,11,5).' '.$model->BrnCreateByName,
+                    ],
+                    [
+                        'format' => 'html',
+                        'label' => 'วันที่รับเรื่อง',
+                        'value' => function ($model) {
+                            if(!empty($model->AcceptAt)){
+                                return substr($model->AcceptAt,8,2).'/'.substr($model->AcceptAt,5,2).'/'.substr($model->AcceptAt,2,2).' '.substr($model->AcceptAt,11,5).' '.$model->AcceptByName;
+                            }else{
+                                return $model->AcceptByName;
+                            }
+                        },
+                    ],
                 ],
-                'BrnRepair',
-                'BrnPos',
-                [
-                    'format'=> 'html',
-                    'label' => 'ยี่ห้อ',
-                    'value' => $model->BrnBrand.' | <span style="color:blue">'.$model->send->SendBrand.'</span>',
+            ]);
+        }else{
+            echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    [
+                        'format' => 'html',
+                        'label' => 'สถานะ',
+                        'value' => '<span style="color:blue">'.$model->BrnStatus.'</span>',
+                    ],
+                    'BrnRepair',
+                    'BrnPos',
+                    [
+                        'format'=> 'html',
+                        'label' => 'ยี่ห้อ',
+                        'value' => $model->BrnBrand.' | <span style="color:blue">'.$model->send->SendBrand.'</span>',
+                    ],
+                    [
+                        'format'=> 'html',
+                        'label' => 'รุ่น',
+                        'value' => $model->BrnModel.' | <span style="color:blue">'.$model->send->SendModel.'</span>',
+                    ],
+                    [
+                        'format'=> 'html',
+                        'label' => 'หมายเลข',
+                        'value' => $model->BrnSerial.' | <span style="color:blue">'.$model->send->SendSerial.'</span>',
+                    ],
+                    'BrnCause',
+                    [
+                        'format' => 'html',
+                        'label' => 'วันที่สร้าง',
+                        'value' => substr($model->CreatedAt,8,2).'/'.substr($model->CreatedAt,5,2).'/'.substr($model->CreatedAt,2,2).' '.substr($model->CreatedAt,11,5).' '.$model->BrnCreateByName,
+                    ],
+                    [
+                        'format' => 'html',
+                        'label' => 'วันที่รับเรื่อง',
+                        'value' => function ($model) {
+                            if(!empty($model->AcceptAt)){
+                                return substr($model->AcceptAt,8,2).'/'.substr($model->AcceptAt,5,2).'/'.substr($model->AcceptAt,2,2).' '.substr($model->AcceptAt,11,5).' '.$model->AcceptByName;
+                            }else{
+                                return $model->AcceptByName;
+                            }
+                        },
+                    ],
+                    [
+                        'format' => 'html',
+                        'label' => 'วันที่ส่งของ',
+                        'value' => substr($model->getSendCreatedAt(),8,2).'/'.substr($model->getSendCreatedAt(),5,2).'/'.substr($model->getSendCreatedAt(),2,2).' '.substr($model->getSendCreatedAt(),11,5).' '.$model->getSendByName(),
+                    ],
                 ],
-                [
-                    'format'=> 'html',
-                    'label' => 'รุ่น',
-                    'value' => $model->BrnModel.' | <span style="color:blue">'.$model->send->SendModel.'</span>',
-                ],
-                [
-                    'format'=> 'html',
-                    'label' => 'หมายเลข',
-                    'value' => $model->BrnSerial.' | <span style="color:blue">'.$model->send->SendSerial.'</span>',
-                ],
-                'BrnCause',
-                [
-                    'format' => 'html',
-                    'label' => 'วันที่สร้าง',
-                    'value' => substr($model->CreatedAt,8,2).'/'.substr($model->CreatedAt,5,2).'/'.substr($model->CreatedAt,2,2).' '.substr($model->CreatedAt,11,5).' '.$model->BrnCreateByName,
-                ],
-                [
-                    'format' => 'html',
-                    'label' => 'วันที่รับเรื่อง',
-                    'value' => function ($model) {
-                        if(!empty($model->AcceptAt)){
-                            return substr($model->AcceptAt,8,2).'/'.substr($model->AcceptAt,5,2).'/'.substr($model->AcceptAt,2,2).' '.substr($model->AcceptAt,11,5).' '.$model->AcceptByName;
-                        }else{
-                            return $model->AcceptByName;
-                        }
-                    },
-                ],
-                [
-                    'format' => 'html',
-                    'label' => 'วันที่ส่งของ',
-                    'value' => substr($model->getSendCreatedAt(),8,2).'/'.substr($model->getSendCreatedAt(),5,2).'/'.substr($model->getSendCreatedAt(),2,2).' '.substr($model->getSendCreatedAt(),11,5).' '.$model->getSendByName(),
-                ],
-            ],
-        ]);
+            ]);
+        }
+
+
     }elseif($model->BrnStatus == 'เรียบร้อย'){
         echo DetailView::widget([
             'model' => $model,
